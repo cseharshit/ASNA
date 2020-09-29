@@ -1,0 +1,12 @@
+The tool, "Automated Systems & Network Auditor (ASNA)", helps in self-auditing of the system. It extracts the information and configuration details of the system which is used to figure out the health of the system. The information- System Version, Days since last update, Days since last password change, etc., are scored. For each of the feature, the score range is defined and based on the extracted results, they are assigned.
+
+The password strength module determines the strength of the user password. It is calculated using the formula:
+Strength = ((length of password*4) + (Uppercase characters*2) + (Lowercase characters*2) + (Numbers * 4) + (Symbols * 6)) - (All Aplhabets + Repeated characters + (Consecutive Uppercase characters*2) + (Consecutive Lowercase characters*2) + (Sequential Characters*3))
+
+The cumulative score is compared with the set standard and percentage is calculated to show the current state of the system:
+* 1% to 33%: Low Security
+* 34% to 66%: Medium Security
+* 67% to 99%: High Security
+* 100%: Perfect Security
+
+The lower the security, the higher the risk factor of the system. Thus, it is recommended to keep the security percentage above 80%.
