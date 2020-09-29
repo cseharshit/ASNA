@@ -22,3 +22,5 @@ It can be personalized to the requirements of the organization for the security 
    * 2 TB Hard Disk memory space
 2. Client end Requirements
    * Minimum 4 GB, and recommended 8 GB RAM
+
+SHA-1 Hash → #1
