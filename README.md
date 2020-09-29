@@ -1,5 +1,5 @@
 # Automated Systems & Network Auditor (ASNA)
-![ASNA](https://github.com/PramanKasliwal/ASNA/blob/master/Images/ASNA.gif "ASNA (Automated Systems & Network Auditor)")
+![ASNA](https://github.com/PramanKasliwal/ASNA/blob/master/Images/ASNA_Medium.gif "ASNA (Automated Systems & Network Auditor)")
 ## Introduction
 **Automated Systems &amp; Network Auditor (ASNA)** is an automated desktop security auditing software that can audit a Windows-based system and generate a detailed PDF report for the user. It scores the system based on the pre-set parameters as required by the network administrators and company policy.
 Once complete, it sends the scores and other important information to a centralized server for storage and the scores will automatically be reflected on the administrator's system using *ELK (Elasticsearch, Logstash, Kibana)* stack.<br>
