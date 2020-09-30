@@ -13,3 +13,4 @@ getpass
 urllib
 fpdf
 re
+wheel
