@@ -1,0 +1,15 @@
+PySimpleGUI
+collections
+socket
+pathlib
+hashlib
+datetime
+sys
+time
+platform
+csv
+uuid
+getpass
+urllib
+fpdf
+re
