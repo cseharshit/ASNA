@@ -27,7 +27,9 @@ $ echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo te
 $ sudo apt update && sudo apt install elasticsearch
 ```
 Once installed, use your preferred text editor to edit Elasticsearch's main configuration file, *elasticsearch.yml*, like this:<br>
-`nano /etc/elasticsearch/elasticsearch.yml`
+```bash
+$ nano /etc/elasticsearch/elasticsearch.yml
+```
 Elasticsearch listens for traffic from everywhere on port `9200`. You will want to restrict outside access to your Elasticsearch instance to prevent outsiders from reading your data or shutting down your Elasticsearch cluster through the REST API. Find the line that specifies `network.host`, uncomment it, and replace its value with `localhost` so it looks like this:
 ``` /etc/elasticsearch/elasticsearch.yml
 . . .
