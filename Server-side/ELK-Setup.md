@@ -75,7 +75,9 @@ $ sudo systemctl start kibana
 Because Kibana is configured to only listen on `localhost`, we must set up a reverse proxy to allow external access to it. We will use Nginx for this purpose, which should already be installed on your server.<br>
 First, use the `openssl` command to create an administrative Kibana user which you’ll use to access the Kibana web interface. As an example we will name this account `kibanaadmin`, but to ensure greater security we recommend that you choose a non-standard name for your user that would be difficult to guess.<br>
 The following command will create the administrative Kibana user and password, and store them in the `htpasswd.users` file. You will configure Nginx to require this username and password and read this file momentarily:<br>
-`$ echo "kibanaadmin:'openssl passwd -apr1'" | sudo tee -a /etc/nginx/htpasswd.users`<br>
+```bash
+$ echo "kibanaadmin:`openssl passwd -apr`'" | sudo tee -a /etc/nginx/htpasswd.users
+```
 Enter and confirm a password at the prompt. Remember or take note of this login, as you will need it to access the Kibana web interface.
 Then, type the following commands:
 ``` bash
