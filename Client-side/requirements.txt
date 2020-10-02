@@ -1,4 +1,4 @@
-PySimpleGUI
+PySimpleGUI==4.29.0
 collections
 socket
 pathlib
@@ -11,6 +11,6 @@ csv
 uuid
 getpass
 urllib
-fpdf
+fpdf==1.7.2
 re
 wheel
