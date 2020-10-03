@@ -45,7 +45,7 @@ class PDF (FPDF):
 
 # Windows Class
 class Windows:
-    logo = 'bin\\logo.jpg'
+    logo = 'bin\\logo.png'
 # __init__ function, or also called a "constructor" function for the class "Windows"
     def __init__(self, proxy="", window=None, password='', user_name = "", labName = "",simplegui=sg):
         try:
@@ -115,7 +115,7 @@ class Windows:
                                   "Employee Name": self.user_name,"Lab Name":self.labName, "File":self.summaryReport}
             self.progBar(11)
         except Exception as msg:
-            self.gui.Popup("Error occured! Please note the error code and contact DITCS.\nError Code: GWIN_INIT", keep_on_top=True, title="Error")
+            self.gui.Popup("Error occured! Please note the error code and contact your system administrator.\nError Code: GWIN_INIT", keep_on_top=True, title="Error")
             #print(str(msg))
             window.close()
 
@@ -133,7 +133,7 @@ class Windows:
             self.pdf.cell(0, 15, text4, 0, 0,'C')
             self.pdf.ln()
         except Exception as msg:
-            self.gui.Popup("Error occured! Please note the error code and contact DITCS.\nError Code: GWIN_FrPg", keep_on_top=True, title="Error")
+            self.gui.Popup("Error occured! Please note the error code and contact your system administrator.\nError Code: GWIN_FrPg", keep_on_top=True, title="Error")
             #print(msg)
             window.close()
 
@@ -142,7 +142,7 @@ class Windows:
         try:
             self.progbar.UpdateBar(progress, 100)
         except:
-            self.gui.Popup("Error occured! Please note the error code and contact DITCS.\nError Code: GWIN_PB", keep_on_top=True, title="Error")
+            self.gui.Popup("Error occured! Please note the error code and contact your system administrator.\nError Code: GWIN_PB", keep_on_top=True, title="Error")
 
 # Enters scores in the scores file
     def write(self, text, mode="a"):
@@ -150,7 +150,7 @@ class Windows:
             with open(self.file, mode) as file:
                 file.write(text)
         except Exception as msg:
-            self.gui.Popup("Error occured! Please note the error code and contact DITCS.\nError Code: GWIN_WRITE", keep_on_top=True, title="Error")
+            self.gui.Popup("Error occured! Please note the error code and contact your system administrator.\nError Code: GWIN_WRITE", keep_on_top=True, title="Error")
             #print(str(msg))
 
 # logs of audit for record maintenance
@@ -163,7 +163,7 @@ class Windows:
                 fobj.write(f"{topic}::"+text.replace(':','=').replace('Name','').replace('UDP','').replace('N/A','').replace('  ','').replace('\r\n','').replace('"',''))
             #print(text)
         except Exception as msg:
-            self.gui.Popup("Error occured! Please note the error code and contact DITCS.\nError Code: GWIN_LOG", keep_on_top=True, title="Error")
+            self.gui.Popup("Error occured! Please note the error code and contact your system administrator.\nError Code: GWIN_LOG", keep_on_top=True, title="Error")
             #print(str(msg))
             sys.exit()
     
@@ -172,7 +172,7 @@ class Windows:
         try:
             self.pdf.print_chapter(num,title,name)
         except Exception as msg:
-            self.gui.Popup("Error occured! Please note the error code and contact DITCS.\nError Code: GWIN_PRNTCH", keep_on_top=True, title="Error")
+            self.gui.Popup("Error occured! Please note the error code and contact your system administrator.\nError Code: GWIN_PRNTCH", keep_on_top=True, title="Error")
             #print(str(msg))
 
 # Scores and Summary, the last page of the PDF contains the complete summary of the audit
@@ -215,7 +215,7 @@ class Windows:
             f_ans += "Percentage: "+str(pcent)+"%\nAnalysis: "+anlys
             self.print_chapter(num,title,f_ans)
         except Exception as msg:
-            self.gui.Popup("Error occured! Please note the error code and contact DITCS.\nError Code: GWIN_SNS\nError: "+str(msg), keep_on_top=True, title="Error")
+            self.gui.Popup("Error occured! Please note the error code and contact your system administrator.\nError Code: GWIN_SNS\nError: "+str(msg), keep_on_top=True, title="Error")
 
 # Introduction chapter of the PDF.
     def results(self,num): # confusing name to avoid malicious manipulation
@@ -243,7 +243,7 @@ class Windows:
             f_ans += "\n\n Maximum Possible Score: "+str(max_score)+" points"
             self.print_chapter(num,title,f_ans)
         except:
-            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact DITCS.\nError Code: GWIN_INTRO"
+            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact your system administrator.\nError Code: GWIN_INTRO"
             self.print_chapter(num,title,f_ans)
 
 # determines the scores that has to be given to a topic.
@@ -279,7 +279,7 @@ class Windows:
                             self.data_dic[topic] = scores[x]
                             return str(scores[x])                        
         except Exception as msg:
-            self.gui.Popup("Error occured! Please note the error code and contact DITCS.\nError Code: GWIN_INVG\nError: "+str(msg), keep_on_top=True, title="Error")
+            self.gui.Popup("Error occured! Please note the error code and contact your system administrator.\nError Code: GWIN_INVG\nError: "+str(msg), keep_on_top=True, title="Error")
             
 # calculates the strength of the password if supplied
     def password_strength(self):
@@ -342,7 +342,7 @@ class Windows:
             self.audit_summary["Password Strength"]=self.strength
             return Strength
         except:
-            self.gui.Popup("Error occured! Please note the error code and contact DITCS.\nError Code: GWIN_PWDSTR", keep_on_top=True, title="Error")
+            self.gui.Popup("Error occured! Please note the error code and contact your system administrator.\nError Code: GWIN_PWDSTR", keep_on_top=True, title="Error")
 
 # powershell code to find anti virus status - by Misha
     def win_antivirus_info(self,num):
@@ -350,63 +350,38 @@ class Windows:
             f_ans=""
             title="Antivirus Status"
             topic="Antivirus"
-            #cmd = "bin\\antivirus.bat" # batch file that contains the code to find the antivirus
-            
-            #change_perm1, err = subprocess.Popen(["powershell.exe", "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted"],stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
-            #print(change_perm1)
-            
-            ans, err = subprocess.Popen(["powershell.exe", "bin\\get_avinfo.ps1"],stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+            cmd = "bin\\antivirus.bat" # batch file that contains the code to find the antivirus
+            ans, err = subprocess.Popen(cmd,stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
             value = 0
-            #ans, err = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True).communicate()
-            #change_perm2, err = subprocess.Popen(["powershell.exe", "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Restricted"],stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
-            #print(change_perm2)   
             ans = ans.decode("utf-8").strip()
-            #print("\nans is\n",ans)
-            count = re.findall("Definition Status.*:",ans)
-            #print(count)
-            AUS = ans
-            for _ in range(len(count)):
-                AUS = AUS[AUS.find("Definition Status")+len("Definition Status"):]
-                #print(AUS)
-                AUS = AUS.strip()[1:].strip()
-            #print(AUS) 
-            antivirusUpdateCheck = 0
-            if AUS == "Up to date":
-                antivirusUpdateCheck += 1
-            #err = err.decode("utf-8")
             if err != b'':
                 ans = "Error: Running of scripts is disabled on the system"
                 value = -10
             f_ans = """Description: Antivirus is a application software that avoids virus infection of the system and quarantines the file that may contain it.
 Security Tip: Make sure that your antivirus is licensed and has its virus definitions up-to-date.
     ____________________\n\n"""
-            #ans = ans.replace("Windows Defender","")
-            #print("\nans at Windows Defender", ans)
+            ans = ans.replace("Windows Defender","")
             if (len(ans.strip()) != 0):
                 self.logger(topic,ans.strip())
-                value=1 + antivirusUpdateCheck
+                value=1
             else:
                 value=0
                 self.logger(topic,"N/A")
             score = self.invigilator(topic,value)
-            value2text={0:"Not Installed",1:"Installed",2:"Installed and Updated"}
+            value2text={0:"Not Installed",1:"Installed"}
             self.audit_summary["Antivirus Status"]=value2text[value]
             self.write("\""+topic+"\","+score+"\n")
             f_ans += ans.strip().replace("\n","\n\t[*] ")
-            #print(f_ans)
             f_ans += "\n___________\nScore: "+score+"\n___________\n"
-            #print(f_ans)
             f_ans += "\nScheme:"
-            #print(f_ans)
             with open(self.score_sheet,'r') as fobj:
                 data = csv.reader(fobj)
                 for row in data:
                     if row[0] == topic:
                         f_ans += "\n    [*] "+row[5]+": "+row[3]+" points"
-            #print(f_ans)
             self.print_chapter(num,title,f_ans)
         except:
-            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact DITCS.\nError Code: GWIN_ANTV"
+            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact your system administrator.\nError Code: GWIN_ANTV"
             self.print_chapter(num,title,f_ans)
             
 # Blacklisted softwares and their location has to be supplied in the dictionary named 'location'
@@ -449,7 +424,7 @@ Security Tip: If you find any such software, or one that you did not installed, 
                         f_ans += "\n    [*] "+row[5]+": "+row[3]+" points"
             self.print_chapter(num,title,f_ans)
         except Exception as msg:
-            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact DITCS.\nError Code: GWIN_BLKSFT"
+            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact your system administrator.\nError Code: GWIN_BLKSFT"
             #print(str(msg))
             self.print_chapter(num,title,f_ans)
             
@@ -492,7 +467,7 @@ Security Tip: If you find any such software, or one that you did not installed, 
             make=None
             os.system("del fw-rules.csv")
         except:
-            self.gui.Popup("Error occured! Please note the error code and contact DITCS.\nError Code: GWIN_FWRLZ", keep_on_top=True, title="Error")
+            self.gui.Popup("Error occured! Please note the error code and contact your system administrator.\nError Code: GWIN_FWRLZ", keep_on_top=True, title="Error")
 
 # Check for established connections other than those of set proxy.
     def win_connections(self,num):
@@ -546,7 +521,7 @@ Security Tip: Connections that bypass proxy may lead to an insecure system as un
                         f_ans += "\n    [*] "+row[5]+": "+row[3]+" points"
             self.print_chapter(num,title,f_ans)
         except:
-            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact DITCS.\nError Code: GWIN_ESTBC"
+            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact your system administrator.\nError Code: GWIN_ESTBC"
             self.print_chapter(num,title,f_ans)
             
 # checks for firewall status of windows firewall for 3 profiles - Domain, Public, and Private profile
@@ -602,7 +577,7 @@ Security Tip: Ensure that all 3 profiles (Domain, Public, and Private) have fire
                         f_ans += "\n    [*] "+row[5]+": "+row[3]+" points"
             self.print_chapter(num,title, f_ans)
         except:
-            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact DITCS.\nError Code: GWIN_FWNFO"
+            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact your system administrator.\nError Code: GWIN_FWNFO"
             self.print_chapter(num,title,f_ans)
             
 # lists the users in the system
@@ -639,7 +614,7 @@ Security Tip: Ensure that all 3 profiles (Domain, Public, and Private) have fire
             final_ans += "\nCurrent Username:\n*"+current_user
             self.print_chapter(num,title,final_ans)            
         except:
-            final_ans += "[!] An error has occured while Auditing the system, please note the error code and contact DITCS.\nError Code: GWIN_USRLT"
+            final_ans += "[!] An error has occured while Auditing the system, please note the error code and contact your system administrator.\nError Code: GWIN_USRLT"
             self.print_chapter(num,title,final_ans)
             
 # Lists the UDP connections to and from the system.
@@ -693,7 +668,7 @@ Security Tip: Ensure that all 3 profiles (Domain, Public, and Private) have fire
                         f_ans += "\n    [*] "+row[5]+": "+row[3]+" points"
             self.print_chapter(num,title,f_ans)
         except:
-            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact DITCS.\nError Code: GWIN_UDPC"
+            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact your system administrator.\nError Code: GWIN_UDPC"
             self.print_chapter(num,title,f_ans)
 
 # Checks the status of last update date and subtracts with today's date to determine the number of days it has been since.
@@ -763,7 +738,7 @@ Security Tip: Ensure that all 3 profiles (Domain, Public, and Private) have fire
                         f_ans += "\n    [*] "+row[5]+": "+row[3]+" points"
             self.print_chapter(num,title,f_ans)
         except Exception as msg:
-            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact DITCS.\nError Code: GWIN_LSTUP\nError Message: "+str(msg)
+            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact your system administrator.\nError Code: GWIN_LSTUP\nError Message: "+str(msg)
             self.print_chapter(num,title,f_ans)
 
 # returns basic information about the system in the form of a dictionary called, 'dev_basics'
@@ -796,7 +771,7 @@ Security Tip: Ensure that all 3 profiles (Domain, Public, and Private) have fire
             os.system("del sysinfo.csv")
             return dev_basics
         except:
-            self.gui.Popup("Error occured! Please note the error code and contact DITCS.\nError Code: GWIN_BSNFO", keep_on_top=True, title="Error")
+            self.gui.Popup("Error occured! Please note the error code and contact your system administrator.\nError Code: GWIN_BSNFO", keep_on_top=True, title="Error")
 
             
 # Checks password status, policy, and tests its strength if it is provided
@@ -842,7 +817,7 @@ Security Tip: Ensure that all 3 profiles (Domain, Public, and Private) have fire
                         f_ans += "\n    [*] "+row[5]+": "+row[3]+" points"
             self.print_chapter(num,title,f_ans)
         except:
-            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact DITCS.\nError Code: GWIN_PWDST"
+            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact your system administrator.\nError Code: GWIN_PWDST"
             self.print_chapter(num,title,f_ans)
 
 # checks number of shared folders and its location.
@@ -890,7 +865,7 @@ Security Tip: Ensure that all 3 profiles (Domain, Public, and Private) have fire
                         f_ans += "\n[*] "+row[5]+": "+row[3]+" points"
             self.print_chapter(num,title,f_ans)
         except:
-            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact DITCS.\nError Code: GWIN_SHRDFD"
+            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact your system administrator.\nError Code: GWIN_SHRDFD"
             self.print_chapter(num,title,f_ans)
 
 # checks if RDP port of the sysem is open and if open, checks if a connection has been maintained
@@ -947,7 +922,7 @@ Security Tip: Ensure that RDP is filtered if not required by the user of the sys
                         f_ans += "\n    [*] "+row[5]+": "+row[3]+" points"
             self.print_chapter(num,title,f_ans)
         except:
-            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact DITCS.\nError Code: GWIN_RDPNF"
+            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact your system administrator.\nError Code: GWIN_RDPNF"
             self.print_chapter(num,title,f_ans)
 
 # lists out the applications that are listed to run on system startup
@@ -965,7 +940,7 @@ Security Tip: Ensure that RDP is filtered if not required by the user of the sys
             f_ans += ans[5:].strip()
             self.print_chapter(num,title,f_ans)
         except:
-            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact DITCS.\nError Code: GWIN_STRAPP"
+            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact your system administrator.\nError Code: GWIN_STRAPP"
             self.print_chapter(num,title,f_ans)
     
 # lists all the programs installed in the system and count the programs that are  not from google, microsoft, hp, lenovo, mozilla, intel, adobe, etc.
@@ -1034,7 +1009,7 @@ Security Tip: Ensure that RDP is filtered if not required by the user of the sys
                         f_ans += "\n    [*] "+row[5]+": "+row[3]+" points"
             self.print_chapter(num,title,f_ans)
         except:
-            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact DITCS.\nError Code: GWIN_PRGLS"
+            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact your system administrator.\nError Code: GWIN_PRGLS"
             self.print_chapter(num,title,f_ans)
 
 # difference between two dates. One date - today's date
@@ -1044,7 +1019,7 @@ Security Tip: Ensure that RDP is filtered if not required by the user of the sys
             delta = datetime.date(today.year,today.month, today.day) - that_day
             return delta.days
         except:
-            self.gui.Popup("Error occured! Please note the error code and contact DITCS.\nError Code: GWIN_DATDI", keep_on_top=True, title="Error")
+            self.gui.Popup("Error occured! Please note the error code and contact your system administrator.\nError Code: GWIN_DATDI", keep_on_top=True, title="Error")
 
 # looks for open ports from the list of those which can be used for malicious purpose or those which are not needed in a client device
     def win_open_ports(self,num):
@@ -1082,7 +1057,7 @@ Security Tip: Ensure that RDP is filtered if not required by the user of the sys
                         f_ans += "\n    [*] "+row[5]+": "+row[3]+" points"
             self.print_chapter(num,title,f_ans)
         except:
-            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact DITCS.\nError Code: GWIN_OPNPT"
+            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact your system administrator.\nError Code: GWIN_OPNPT"
             self.print_chapter(num,title,f_ans)
 
 # lists out the details of the usb devices that were plugged in the system long with their date and time.
@@ -1158,7 +1133,7 @@ Security Tip: Ensure that RDP is filtered if not required by the user of the sys
                     data = file.read()
                 self.usb_lister(num)
         except:
-            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact DITCS.\nError Code: GWIN_USBLT"
+            f_ans += "[!] An error has occured while Auditing the system, please note the error code and contact your system administrator.\nError Code: GWIN_USBLT"
             self.print_chapter(num,title,f_ans)
   
 # main function of the class "Windows". Add a new function in this to call.
@@ -1317,7 +1292,7 @@ Chapter 17: Score & Summary
             #print(len(self.data))
             return (self.file, self.serverIP, self.data_dic, self.data, self.audit_summary)
         except Exception as msg:
-            self.gui.Popup("Error occured! Please note the error code and contact DITCS.\nError Code: GWIN_WINOS\n"+str(msg), keep_on_top=True, title="Error")
+            self.gui.Popup("Error occured! Please note the error code and contact your system administrator.\nError Code: GWIN_WINOS\n"+str(msg), keep_on_top=True, title="Error")
             #print(str(msg))
             return (self.file, self.serverIP, self.data_dic, self.data, self.audit_summary)
 
